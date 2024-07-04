@@ -29,7 +29,7 @@ public class Materia {
 	private String codigo;
 	
 	@Column(name = "nombre", nullable = false)
-	@Pattern(regexp = "[a-zA-Z ]*", message = "El nombre solo debe contener letras y espacios.")
+	@Pattern(regexp = "[a-zA-Z ]*", message = "El nombre solo debe contener letras.")
 	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres.")
 	private String nombre;
 

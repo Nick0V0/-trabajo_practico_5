@@ -33,14 +33,14 @@ public class DocenteController {
 	@PostMapping("/guardarDocente")
 	public ModelAndView saveDocente(@Valid@ModelAttribute("nuevoDocente") Docente docenteParaGuardar,BindingResult result) {
 		ModelAndView modelView 	= new ModelAndView("listaDeDocentes");
+		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
 		try {
 			if (result.hasErrors()) {
-				modelView.addObject("formDocente");
+				modelView.setViewName("formDocente");
 				modelView.addObject("flag", false);
 			}
 			else {
 				docenteService.guardarDocente(docenteParaGuardar);	
-				modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());	
 			}
 		} catch (Exception e) {
 			modelView.addObject("errors", true);
@@ -62,12 +62,10 @@ public class DocenteController {
 		
 		//borrar
 		docenteService.borrarDocente(legajo);
-		
 		//mostrar nueva lista de docentes
 		ModelAndView modelView = new ModelAndView("listadoDeDocentes");
-		modelView.addObject("listaDocentes",docenteService.mostrarDocentes());
-		
-		 return modelView;
+		modelView.addObject("listadoDocentes",docenteService.mostrarDocentes());
+		return modelView;
 	}
 	
 	@GetMapping("/modificarDocente/{legajo}")
@@ -76,6 +74,7 @@ public class DocenteController {
 		Docente docente = docenteService.buscarDocente(legajo);
 		ModelAndView modelView = new ModelAndView("formDocente");
 		modelView.addObject("nuevoDocente", docente);
+		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
 		modelView.addObject("flag", true);
 		return modelView;
 	}
@@ -85,8 +84,10 @@ public class DocenteController {
 		ModelAndView modelView = new ModelAndView("listaDeDocentes");
 		try {
 			if (result.hasErrors()) {
-				modelView.addObject("nuevaMateria", docenteModificado);
-				modelView.addObject("flag", true);
+				modelView.addObject("nuevoDocente", docenteModificado);
+				modelView.setViewName("formDocente");
+				modelView.addObject("flag", false);
+				
 			} else {
 				docenteService.modificarDocente(docenteModificado);
 			}
@@ -96,7 +97,7 @@ public class DocenteController {
 			System.out.println(e.getMessage());
 
 		}
-		modelView.addObject("listaDocentes", docenteService.mostrarDocentes());
+		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
 
 		return modelView;
 	}

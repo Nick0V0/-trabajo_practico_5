@@ -20,6 +20,9 @@
 					type="number" class="form-control" id="legajo"
 					aria-describedby="legajo" data-th-field="*{legajo}"
 					data-th-readonly=${flag}>
+				<p class="form-text text-danger"
+					data-th-if="${#fields.hasErrors('legajo')}"
+					data-th-errors="*{legajo}"></p>
 
 			</div>
 			<div class="col">
@@ -35,6 +38,9 @@
 				<label for="apellido" class="form-label">Apellidos</label> <input
 					type="text" class="form-control" id="apellido"
 					aria-describedby="apellido" data-th-field="*{apellido}">
+				<p class="form-text text-danger"
+					data-th-if="${#fields.hasErrors('apellido')}"
+					data-th-errors="*{apellido}"></p>
 
 			</div>
 			<div class="col">
@@ -47,6 +53,9 @@
 				<label for="telefono" class="form-label">Telefono</label> <input
 					type="number" class="form-control" id="telefono"
 					data-th-field="*{telefono}">
+				<p class="form-text text-danger"
+					data-th-if="${#fields.hasErrors('telefono')}"
+					data-th-errors="*{telefono}"></p>
 			</div>
 			<div>
 				<label for="estadoAlumno" class="form-label mt-1 ">Estado</label> <select

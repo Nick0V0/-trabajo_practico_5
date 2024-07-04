@@ -30,7 +30,7 @@ data-th-href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 				<td data-th-text="${docente.nombre}"></td>
 				<td data-th-text="${docente.email}"></td>
 				<td>
-						<a data-th-href="@{'/eliminarDocente/'+${docente.legajo}}" class="btn btn-danger">Borrar</a>				
+						<a data-th-href="@{'/borrarMateria/'+${docente.legajo}}" class="btn btn-danger">Borrar</a>				
 						<a data-th-href="@{'/modificarDocente/'+${docente.legajo}}" class="btn btn-warning">Modificar</a>
 						
 				</td>

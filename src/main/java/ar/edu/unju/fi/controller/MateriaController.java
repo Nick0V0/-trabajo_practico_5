@@ -76,7 +76,6 @@ public class MateriaController {
 		modelView.addObject("nuevaMateria", materia);
 		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
 		modelView.addObject("flag", true);
-
 		return modelView;
 	}
 
@@ -86,8 +85,8 @@ public class MateriaController {
 		try {
 			if (result.hasErrors()) {
 				modelView.addObject("nuevaMateria", materiaModificada);
-				modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
-				modelView.addObject("flag", true);
+				modelView.setViewName("formMateria");
+				modelView.addObject("flag", false);
 			} else {
 				materiaModificada.setDocente(docenteService.buscarDocente(materiaModificada.getDocente().getLegajo()));
 				materiaService.modificarMateria(materiaModificada);
