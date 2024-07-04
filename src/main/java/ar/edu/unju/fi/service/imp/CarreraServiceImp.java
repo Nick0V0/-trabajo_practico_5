@@ -10,7 +10,8 @@ import ar.edu.unju.fi.mapper.CarreraMapDTO;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class CarreraServiceImp implements CarreraService{
 	
@@ -22,19 +23,24 @@ public class CarreraServiceImp implements CarreraService{
 	
 	@Override
 	public void guardarCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
-			carreraRepository.save(carrera);
+		log.info("SERVICE: CarreraServiceImp -> guardarCarrera");
+		log.info("METHOD: guardarCarrera()");
+		log.info("INFO: Guardando Carrera con codigo {}", carrera.getCodigo());
+		carreraRepository.save(carrera);
 	}
 
 	@Override
 	public List<CarreraDTO> mostrarCarreras() {
-		// TODO Auto-generated method stub
-		
+		log.info("SERVICE: CarreraServiceImp -> mostrarCarrera");
+		log.info("METHOD: mostrarCarrera()");
 		return carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findCarrerasByEstado(true));
 	}
 
 	@Override
 	public void borrarCarrera(String codigo) {
+		log.info("SERVICE: CarreraServiceImp -> borrarCarrera");
+		log.info("METHOD: borrarCarrera()");
+		log.info("INFO: Borrando carrera con codigo {}", codigo);
 		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
@@ -47,6 +53,9 @@ public class CarreraServiceImp implements CarreraService{
 	@Override
 	public Carrera buscarCarrera(String codigo) { 
 		// TODO Auto-generated method stub
+		log.info("SERVICE: CarreraServiceImp -> buscarCarrera");
+		log.info("METHOD: buscarCarrera()");
+		log.info("INFO: Buscando carrera con codigo {}", codigo);
 		List<Carrera> todasLasCarreras = carreraRepository.findAll();
 		for (Carrera carreras : todasLasCarreras) {
 			if(carreras.getCodigo().equals(codigo)) {
@@ -58,7 +67,9 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public void modificarCarrera(Carrera carrera) {
-		// TODO Auto-generated method stub
+		log.info("SERVICE: CarreraServiceImp -> modificarCarrera");
+		log.info("METHOD: modificarCarrera()");
+		log.info("INFO: Modificando carrera con codigo {}", carrera.getCodigo());
 		carreraRepository.save(carrera);
 	}
 
