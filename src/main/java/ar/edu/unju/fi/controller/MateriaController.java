@@ -85,6 +85,7 @@ public class MateriaController {
 		try {
 			if (result.hasErrors()) {
 				modelView.addObject("nuevaMateria", materiaModificada);
+				modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
 				modelView.setViewName("formMateria");
 				modelView.addObject("flag", false);
 			} else {
