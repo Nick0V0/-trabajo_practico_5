@@ -54,7 +54,7 @@ public class AlumnoController {
 	}
 	
 	@PostMapping("/guardarAlumno")
-	public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno nuevoAlumno, BindingResult resultado ) {
+	public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno alumnoParaGuardar, BindingResult resultado ) {
 		ModelAndView modelView = new ModelAndView("listaDeAlumnos");
 		modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
 
@@ -66,7 +66,8 @@ public class AlumnoController {
 					
 				}
 				else {
-					alumnoService.guardarAlumno(nuevoAlumno);
+					alumnoParaGuardar.setCarrera(carreraService.buscarCarrera(alumnoParaGuardar.getCarrera().getCodigo()));
+					alumnoService.guardarAlumno(alumnoParaGuardar);
 					modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 					
 					
@@ -106,6 +107,7 @@ public class AlumnoController {
 				}
 				else {
 					//System.out.println("Alumno modificado correctamente  "+nuevoAlumno.getNombre());
+					alumnoModificado.setCarrera(carreraService.buscarCarrera(alumnoModificado.getCarrera().getCodigo()));
 					alumnoService.modificarAlumno(alumnoModificado);
 					modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 				}
