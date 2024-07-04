@@ -13,6 +13,6 @@ import lombok.Setter;
 public class CarreraDTO {
 	private String codigo;
 	private String nombre;
-	private int cantidadAños;
+	private int cantidadAnios;
 	private Boolean estado;
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.mapper.CarreraMapDTO;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
 
@@ -20,9 +21,9 @@ public class CarreraServiceImp implements CarreraService{
 	CarreraMapDTO carreraMapDto;
 	
 	@Override
-	public void guardarCarrera(CarreraDTO carreraDTO) {
+	public void guardarCarrera(Carrera carrera) {
 		// TODO Auto-generated method stub
-			carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carreraDTO));
+			carreraRepository.save(carrera);
 	}
 
 	@Override
@@ -34,20 +35,20 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public void borrarCarrera(String codigo) {
-		List<CarreraDTO> carreras = carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findAll());
+		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
 				carrera.setEstado(false);
-				carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carrera));
+				carreraRepository.save(carrera);
 			}
 		});
 	}
 
 	@Override
-	public CarreraDTO buscarCarrera(String codigo) { 
+	public Carrera buscarCarrera(String codigo) { 
 		// TODO Auto-generated method stub
-		List<CarreraDTO> todasLasCarreras = carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findAll());
-		for (CarreraDTO carreras : todasLasCarreras) {
+		List<Carrera> todasLasCarreras = carreraRepository.findAll();
+		for (Carrera carreras : todasLasCarreras) {
 			if(carreras.getCodigo().equals(codigo)) {
 				return carreras;
 			}
@@ -56,9 +57,9 @@ public class CarreraServiceImp implements CarreraService{
 	}
 
 	@Override
-	public void modificarCarrera(CarreraDTO carreraDTO) {
+	public void modificarCarrera(Carrera carrera) {
 		// TODO Auto-generated method stub
-		carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carreraDTO));
+		carreraRepository.save(carrera);
 	}
 
 }
