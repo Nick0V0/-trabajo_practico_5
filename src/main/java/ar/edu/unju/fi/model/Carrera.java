@@ -43,5 +43,8 @@ public class Carrera {
 	@OneToMany(mappedBy = "carrera")
 	private List<Alumno> alumnos;
 	
-	private boolean estado;
+	@OneToMany(mappedBy = "carrera")
+	private List<Materia> materia;
+	
+	private Boolean estado;
 }
