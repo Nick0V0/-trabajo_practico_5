@@ -8,60 +8,95 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapDTO;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.AlumnoService;
 import lombok.extern.slf4j.Slf4j;
 @Service
-@Slf4j
+	@Slf4j
 public class AlumnoServiceImp implements AlumnoService {
 	@Autowired
 	AlumnoRepository alumnoRepository;
 	@Autowired
 	AlumnoMapDTO alumnoMapDTO;
+	@Autowired
+	MateriaRepository materiaRepository;
 
-	@Override
-	public void guardarAlumno(Alumno alumno) {
-		// TODO Auto-generated method stub
-		alumno.setEstado(true);
-		alumnoRepository.save(alumno);
-	}
-	
-	@Override
-	public List<AlumnoDTO> mostrarAlumnos() {
-		return alumnoMapDTO.convertirListaAlumnosAListaAlumnosDTO(alumnoRepository.findAlumnoByEstado(true)); 	
-		}
-	
-	@Override
-	public void borrarAlumno(String lu) {
-		log.info("METHOD: borrarAlumno()");
-		List<Alumno> alumnosDTO = alumnoRepository.findAll();
-		alumnosDTO.forEach(adto -> {
-			if(adto.getLu().equals(lu)) {
-				adto.setEstado(false);	
-				alumnoRepository.save(adto);
-			}
-		});
-	}
+    @Override
+    public void guardarAlumno(Alumno alumno) {
+        // Establecer el estado del alumno como activo
+        alumno.setEstado(true);
+        // Guardar los cambios en la base de datos
+        alumnoRepository.save(alumno);
+        log.info("Alumno guardado: {}", alumno.getNombre());
+    }
 
-	@Override
-	public Alumno buscarAlumno(String lu) {
-		// TODO Auto-generated method stub
-		List<Alumno> alumnos = alumnoRepository.findAlumnoByEstado(true);
-		for(int i=0;i < alumnos.size();i++) {
-			Alumno alumno = alumnos.get(i);
-			if(alumno.getLu().equals(lu)) {
-				return alumno;
-			}
-		}
-		return null;
-	}
+    @Override
+    public List<AlumnoDTO> mostrarAlumnos() {
+        // Obtener la lista de alumnos activos
+        List<Alumno> alumnosActivos = alumnoRepository.findAlumnoByEstado(true);
+        // Convertir la lista de alumnos a una lista de DTOs
+        List<AlumnoDTO> alumnosDTO = alumnoMapDTO.convertirListaAlumnosAListaAlumnosDTO(alumnosActivos);
+        log.info("Mostrando {} alumnos activos", alumnosDTO.size());
+        return alumnosDTO;
+    }
 
-	@Override
-	public void modificarAlumno(Alumno alumnoModificado) {
+    @Override
+    public void borrarAlumno(String lu) {
+        log.info("MÉTODO: borrarAlumno()");
+        // Obtener todos los alumnos
+        List<Alumno> alumnos = alumnoRepository.findAll();
+        // Buscar el alumno con el LU proporcionado
+        alumnos.forEach(adto -> {
+            if (adto.getLu().equals(lu)) {
+                // Establecer el estado del alumno como inactivo
+                adto.setEstado(false);
+                // Guardar los cambios en el repositorio
+                alumnoRepository.save(adto);
+                log.info("Alumno con LU {} borrado", lu);
+            }
+        });
+    }
 
-		// TODO Auto-generated method stub
-		alumnoRepository.save(alumnoModificado);
-	}
+    @Override
+    public Alumno buscarAlumno(String lu) {
+        // Obtener la lista de alumnos activos
+        List<Alumno> alumnosActivos = alumnoRepository.findAlumnoByEstado(true);
+        // Buscar el alumno con el LU proporcionado
+        for (Alumno alumno : alumnosActivos) {
+            if (alumno.getLu().equals(lu)) {
+                log.info("Alumno encontrado con LU {}: {}", lu, alumno.getNombre());
+                return alumno;
+            }
+        }
+        log.info("No se encontró ningún alumno con LU {}", lu);
+        return null;
+    }
+
+    @Override
+    public void modificarAlumno(Alumno alumnoModificado) {
+        // Guardar los cambios en el repositorio
+        alumnoRepository.save(alumnoModificado);
+        log.info("Alumno modificado: {}", alumnoModificado.getNombre());
+    }
+
+    @Override
+    public void inscribirAlumno(Alumno alumno, Materia materia) {
+        // Agregar la materia al alumno y viceversa
+        alumno.getMaterias().add(materia);
+        materia.getAlumnos().add(alumno);
+        // Guardar los cambios en los repositorios
+        alumnoRepository.save(alumno);
+        materiaRepository.save(materia);
+        log.info("Alumno {} inscrito en la materia {}", alumno.getNombre(), materia.getNombre());
+    }
+	/*
+	 * @Override public List<Alumno> filtrarAlumnosMaterias(String codigo) { // TODO
+	 * Auto-generated method stub
+	 * 
+	 * return alumnoRepository.findMateriasID(codigo); }
+	 */
 
 
 }

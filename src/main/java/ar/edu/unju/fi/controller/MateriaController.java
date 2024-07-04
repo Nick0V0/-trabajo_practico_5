@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.DocenteService;
 import ar.edu.unju.fi.service.MateriaService;
 import ar.edu.unju.fi.service.imp.DocenteServiceImp;
@@ -26,7 +27,8 @@ public class MateriaController {
 	MateriaService materiaService;
 	@Autowired
 	DocenteService docenteService;
-
+	@Autowired
+	CarreraService carreraService;
 
 	@GetMapping("/formularioMateria")
 	public ModelAndView getFormMateria() {

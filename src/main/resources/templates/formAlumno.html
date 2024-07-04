@@ -45,6 +45,8 @@
 						<div class="col-6">
 				<label for="domicilio" class="form-label text-white">Domicilio</label> <input type="text" class="form-control col-4"
 					id="domicilio" aria-describedby="domicilio" data-th-field="*{domicilio}" >
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('domicilio')}" data-th-errors="*{domicilio}"></p>
+					
 			</div>
 			<div class="col-6">
 				<label for="dni" class="form-label text-white">DNI</label> <input type="number" class="form-control"
