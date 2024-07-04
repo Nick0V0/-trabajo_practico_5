@@ -15,5 +15,6 @@ public interface AlumnoService {
 	public void modificarAlumno(Alumno alumnoModificado);
 	public Alumno buscarAlumno(String lu);
 	public void inscribirAlumno(Alumno alumno, Materia materia);
+	public List<Alumno> filtrarAlumnos(String codigo);
 
 }
