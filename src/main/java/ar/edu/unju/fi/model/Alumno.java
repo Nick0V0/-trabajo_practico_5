@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -44,7 +45,7 @@ public class Alumno {
 	private String telefono;
 	@Past
 	@NotNull	
-	private String fec_nac;
+	private LocalDate fec_nac;
 	@NotBlank(message="Debe ingresar Domicilio del Alumno")
 	@Size(min=8, max=15,message="longitud del Domicilio no valida")
 	private String domicilio;

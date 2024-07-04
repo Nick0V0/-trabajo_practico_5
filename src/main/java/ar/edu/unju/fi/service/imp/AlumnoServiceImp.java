@@ -10,10 +10,10 @@ import ar.edu.unju.fi.mapper.AlumnoMapDTO;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.repository.AlumnoRepository;
 import ar.edu.unju.fi.service.AlumnoService;
+import lombok.extern.slf4j.Slf4j;
 @Service
+@Slf4j
 public class AlumnoServiceImp implements AlumnoService {
-	@Autowired
-	Alumno alumno;
 	@Autowired
 	AlumnoRepository alumnoRepository;
 	@Autowired
@@ -22,6 +22,7 @@ public class AlumnoServiceImp implements AlumnoService {
 	@Override
 	public void guardarAlumno(Alumno alumno) {
 		// TODO Auto-generated method stub
+		alumno.setEstado(true);
 		alumnoRepository.save(alumno);
 	}
 	
@@ -32,11 +33,12 @@ public class AlumnoServiceImp implements AlumnoService {
 	
 	@Override
 	public void borrarAlumno(String lu) {
-		List<AlumnoDTO> alumnosDTO = alumnoMapDTO.convertirListaAlumnosAListaAlumnosDTO(alumnoRepository.findAll());
+		log.info("METHOD: borrarAlumno()");
+		List<Alumno> alumnosDTO = alumnoRepository.findAll();
 		alumnosDTO.forEach(adto -> {
 			if(adto.getLu().equals(lu)) {
-				adto.setEstado(false);
-				alumnoRepository.save(alumnoMapDTO.convertirAlumnoDTOAAlumno(adto));
+				adto.setEstado(false);	
+				alumnoRepository.save(adto);
 			}
 		});
 	}

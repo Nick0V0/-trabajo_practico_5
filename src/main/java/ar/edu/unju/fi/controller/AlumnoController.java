@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.AlumnoService;
@@ -19,14 +18,12 @@ import jakarta.validation.Valid;
 public class AlumnoController {
 	@Autowired
 	Alumno nuevoAlumno;
-	
 	@Autowired
 	AlumnoService alumnoService;
 	@Autowired
 	Materia nuevaMateria;
 	@Autowired
 	MateriaService materiaService;
-
 	@GetMapping("/formularioAlumno")
 	public ModelAndView getFormAlumno() {
 		
@@ -107,7 +104,7 @@ public class AlumnoController {
 		return modelView;
 			
 	} 
-	
+				
 	@GetMapping("/borrarAlumno/{lu}")
 	public ModelAndView deleteAlumnoDelListado(@PathVariable (name="lu") String lu) {
 		
