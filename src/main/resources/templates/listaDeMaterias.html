@@ -35,7 +35,10 @@
 					<td><a data-th-href="@{'/borrarMateria/'+${materia.codigo}}"
 						class="btn btn-danger">Borrar</a> <a
 						data-th-href="@{'/modificarMateria/'+${materia.codigo}}"
-						class="btn btn-warning">Modificar</a></td>
+						class="btn btn-warning">Modificar</a>
+						<a data-th-href="@{'/filtrarAlumnos/'+${materia.codigo}}" 
+						class="btn btn-danger">Filtrar Alumnos</a>
+						</td>
 				</tr>
 			</tbody>
 		</table>

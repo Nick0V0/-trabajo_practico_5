@@ -91,12 +91,16 @@ public class AlumnoServiceImp implements AlumnoService {
         materiaRepository.save(materia);
         log.info("Alumno {} inscrito en la materia {}", alumno.getNombre(), materia.getNombre());
     }
-	/*
-	 * @Override public List<Alumno> filtrarAlumnosMaterias(String codigo) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * return alumnoRepository.findMateriasID(codigo); }
-	 */
+    
+	@Override
+	public List<Alumno> filtrarAlumnos(String codigo) {
+		// TODO Auto-generated method stub
+		log.info("SERVICE: AlumnoServiceImp -> filtrarAlumnos()");
+		log.info("METHOD: filtrarAlumnos()");
+		log.info("INFO: Filtrando alumnos por codigo{}", codigo);
+		log.info("INFO: Alumno filtrado {}", codigo);
+		return alumnoRepository.findByMateriasCodigo(codigo);
+	}
 
 
 }
