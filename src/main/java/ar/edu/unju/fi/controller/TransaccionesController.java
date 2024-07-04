@@ -31,6 +31,7 @@ public class TransaccionesController {
 		ModelAndView modelView = new ModelAndView("formAlumnoInsc");		
 		modelView.addObject("nuevoAlumno", nuevoAlumno);
 		modelView.addObject("nuevaMateria", nuevaMateria);
+		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
 		modelView.addObject("listadoMaterias", materiaService.mostrarMaterias());
 		return modelView;
 	}

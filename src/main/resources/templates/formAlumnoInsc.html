@@ -15,12 +15,13 @@
 		    
 		   	         <div class="container">
 			<form data-th-object="${nuevoAlumno} "data-th-action="@{/inscribirAlumno}" method="post">
-														
-							<div  class="col-6">
-								<label for="lu" class="form-label ">LU</label> 
-								<input type="text" class="form-control" id="lu" data-th-field="*{lu}"  >
-								<p class="form-text text-danger" data-th-if="${#fields.hasErrors('lu')}" data-th-errors="*{lu}"></p>
-							</div >	        			         
+			 	            <div class="col-6">
+					            <label for="alumno" class="form-label">Alumno</label>
+					            <select id="alumno" data-th-field="*{lu}" class="form-control" required>
+					                <option value="">Seleccionar Materia</option>
+						            <option data-th-value="${a.lu}" data-th-each="a:${listadoAlumnos}" data-th-text="${a.nombre}"></option>
+				                </select>					    
+			                </div>						  										          			         
 			 	        <div data-th-object="${nuevaMateria}">
 			 	            <div class="col-6">
 					            <label for="materia" class="form-label">Materia</label>
