@@ -67,7 +67,15 @@
 				
 				
 			</div>
-			
+			<div class="col-md-12">
+					    <label for="carrera" class="form-label">Carrera</label>
+					    	<select id="carrera" data-th-field="*{carrera.codigo}" class="form-control" required>
+						    	<option value="">Seleccionar Carrera</option>
+						    	<option data-th-value="${c.codigo}" data-th-each="c:${listadoCarreras}" data-th-text="${c.nombre}"></option>
+						   	 </select>
+					    
+			</div>
+							  
 			<hr>
 			<br><br>	
 			<div class=" d-flex justify-content-center bg-white" >

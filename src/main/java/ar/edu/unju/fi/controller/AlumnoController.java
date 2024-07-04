@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.AlumnoService;
+import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
 
@@ -24,13 +25,15 @@ public class AlumnoController {
 	Materia nuevaMateria;
 	@Autowired
 	MateriaService materiaService;
+	@Autowired
+	CarreraService carreraService;
 	@GetMapping("/formularioAlumno")
 	public ModelAndView getFormAlumno() {
 		
 		ModelAndView modelView = new ModelAndView("formAlumno");
 		modelView.addObject("nuevoAlumno", nuevoAlumno);	
 		modelView.addObject("flag", false);
-	
+		modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
 		return modelView;
 	}
 	
