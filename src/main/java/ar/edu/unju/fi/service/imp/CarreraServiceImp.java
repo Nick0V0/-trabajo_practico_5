@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.mapper.CarreraMapDTO;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.CarreraService;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class CarreraServiceImp implements CarreraService{
 	
@@ -20,34 +22,42 @@ public class CarreraServiceImp implements CarreraService{
 	CarreraMapDTO carreraMapDto;
 	
 	@Override
-	public void guardarCarrera(CarreraDTO carreraDTO) {
-		// TODO Auto-generated method stub
-			carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carreraDTO));
+	public void guardarCarrera(Carrera carrera) {
+		log.info("SERVICE: CarreraServiceImp -> guardarCarrera");
+		log.info("METHOD: guardarCarrera()");
+		log.info("INFO: Guardando Carrera con codigo {}", carrera.getCodigo());
+		carreraRepository.save(carrera);
 	}
 
 	@Override
 	public List<CarreraDTO> mostrarCarreras() {
-		// TODO Auto-generated method stub
-		
+		log.info("SERVICE: CarreraServiceImp -> mostrarCarrera");
+		log.info("METHOD: mostrarCarrera()");
 		return carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findCarrerasByEstado(true));
 	}
 
 	@Override
 	public void borrarCarrera(String codigo) {
-		List<CarreraDTO> carreras = carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findAll());
+		log.info("SERVICE: CarreraServiceImp -> borrarCarrera");
+		log.info("METHOD: borrarCarrera()");
+		log.info("INFO: Borrando carrera con codigo {}", codigo);
+		List<Carrera> carreras = carreraRepository.findAll();
 		carreras.forEach(carrera -> {
 			if(carrera.getCodigo().equals(codigo)) {
 				carrera.setEstado(false);
-				carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carrera));
+				carreraRepository.save(carrera);
 			}
 		});
 	}
 
 	@Override
-	public CarreraDTO buscarCarrera(String codigo) { 
+	public Carrera buscarCarrera(String codigo) { 
 		// TODO Auto-generated method stub
-		List<CarreraDTO> todasLasCarreras = carreraMapDto.convertirListaCarreraAListaCarreraDTO(carreraRepository.findAll());
-		for (CarreraDTO carreras : todasLasCarreras) {
+		log.info("SERVICE: CarreraServiceImp -> buscarCarrera");
+		log.info("METHOD: buscarCarrera()");
+		log.info("INFO: Buscando carrera con codigo {}", codigo);
+		List<Carrera> todasLasCarreras = carreraRepository.findAll();
+		for (Carrera carreras : todasLasCarreras) {
 			if(carreras.getCodigo().equals(codigo)) {
 				return carreras;
 			}
@@ -56,9 +66,11 @@ public class CarreraServiceImp implements CarreraService{
 	}
 
 	@Override
-	public void modificarCarrera(CarreraDTO carreraDTO) {
-		// TODO Auto-generated method stub
-		carreraRepository.save(carreraMapDto.convertirCarreraDTOACarrera(carreraDTO));
+	public void modificarCarrera(Carrera carrera) {
+		log.info("SERVICE: CarreraServiceImp -> modificarCarrera");
+		log.info("METHOD: modificarCarrera()");
+		log.info("INFO: Modificando carrera con codigo {}", carrera.getCodigo());
+		carreraRepository.save(carrera);
 	}
 
 }
