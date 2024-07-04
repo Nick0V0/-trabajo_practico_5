@@ -12,12 +12,14 @@
 </div>
 <div style="background-color:#FF5733;">
 <div class="container">
-    <h1 class="mb-4">Alumnos por Carrera</h1>
+	<center>
+    <h1 class="mb-4" style="color: #92aad0;">Alumnos por Carrera</h1>
+    </center>
     <form th:action="@{/buscarAlumnosPorCarrera}" method="get">
-        <div class="form-group">
-            <label for="carrera">Carrera</label>
+        <div class="col-6">
+            <label for="carrera" class="form-label" style="color: #92aad0;">Carrera</label>
             <select class="form-select" id="carrera" name="carrera" required>
-                <option value="" disabled selected>Seleccione una carrera</option>
+                <option value="" disabled selected>Consultar carrera:</option>
                 <option th:each="c : ${carreras}" th:value="${c.codigo}" th:text="${c.nombre}"></option>
             </select>
         </div>

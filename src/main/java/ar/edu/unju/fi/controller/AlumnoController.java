@@ -7,14 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Materia;
+import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.service.AlumnoService;
 import ar.edu.unju.fi.service.CarreraService;
 import ar.edu.unju.fi.service.MateriaService;
 import jakarta.validation.Valid;
-
+import org.springframework.ui.Model;
 @Controller
 public class AlumnoController {
 	@Autowired
@@ -27,6 +30,9 @@ public class AlumnoController {
 	MateriaService materiaService;
 	@Autowired
 	CarreraService carreraService;
+	@Autowired
+	private CarreraRepository carreraRepository;
+	
 	@GetMapping("/formularioAlumno")
 	public ModelAndView getFormAlumno() {
 		
@@ -125,5 +131,19 @@ public class AlumnoController {
 		
 		 return modelView;
 	}
-	
+	@GetMapping("/alumnosPorCarrera")
+    public String mostrarAlumnosPorCarrera(Model model) {
+        model.addAttribute("carreras", carreraRepository.findAll());
+        return "alumnosPorCarrera";
+    }
+
+    @GetMapping("/buscarAlumnosPorCarrera")
+    public String buscarAlumnosPorCarrera(@RequestParam("carrera") String codigoCarrera, Model model) {
+        Carrera carrera = carreraRepository.findById(codigoCarrera).orElse(null);
+        if (carrera != null) {
+            model.addAttribute("listadoAlumnos", carrera.getAlumnos());
+        }
+        model.addAttribute("carreras", carreraRepository.findAll());
+        return "alumnosPorCarrera";
+    }
 }
