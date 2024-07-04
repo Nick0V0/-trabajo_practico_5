@@ -53,6 +53,7 @@ public class AlumnoController {
 			try {
 				if(resultado.hasErrors()) {
 					System.out.println("SE CAPTO UN ERROR DE VALIDACION");
+					modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
 					modelView.setViewName("formAlumno");
 					
 				}
@@ -79,6 +80,7 @@ public class AlumnoController {
 		Alumno alumno = alumnoService.buscarAlumno(lu);
 		// mostrar el nuevo formulario
 		ModelAndView modelView = new ModelAndView("formAlumno");
+		modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
 		modelView.addObject("nuevoAlumno", alumno);
 		modelView.addObject("flag", true);
 		return modelView;
@@ -91,6 +93,7 @@ public class AlumnoController {
 			
 			try {
 				if(resultado.hasErrors()) {
+					modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
 					modelView.setViewName("formAlumno");
 				}
 				else {

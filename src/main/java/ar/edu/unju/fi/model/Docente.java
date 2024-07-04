@@ -23,12 +23,12 @@ public class Docente {
     private String  legajo;
     
     @Column(name = "nombre", nullable = false)
-	@Pattern(regexp = "[a-zA-Z ]*", message = "El nombre solo debe contener letras.")
+	@Pattern(regexp = "^[a-zA-Záéíóú ]*$", message = "Solo se permiten letras y espacios")
 	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres.")
     private String nombre;
     
     @Column(name = "apellido", nullable = false)
-	@Pattern(regexp = "[a-zA-Z ]*", message = "El apellido solo debe contener letras.")
+	@Pattern(regexp = "^[a-zA-Záéíóú ]*$", message = "Solo se permiten letras y espacios")
 	@Size(min = 3, max = 100, message = "El apellido debe tener entre 3 y 100 caracteres.")
     private String apellido;
     

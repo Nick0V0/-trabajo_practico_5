@@ -34,7 +34,7 @@ public class Alumno {
 	private String dni;
 	@NotBlank(message="Debe ingresar Nombre del Alumno")
 	@Size(min=3, max=20,message="El nombre debe contener como minimo 3 Caracteres como minimo y 20 como maximo")
-	@Pattern(regexp="[a-z A-Z]*",message="Solo se debe ingresar Letras")
+	@Pattern(regexp = "^[a-zA-Záéíóú ]*$", message = "Solo se permiten letras y espacios")
 	private String nombre;
 	@NotBlank(message="Debe ingresar Apellido del Alumno")
 	@Size(min=3, max=20,message="El Apellido debe contener como minimo 3 Caracteres como minimo y 20 como maximo")
