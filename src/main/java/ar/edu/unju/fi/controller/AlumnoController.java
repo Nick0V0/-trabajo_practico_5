@@ -49,7 +49,9 @@ public class AlumnoController {
 	
 	@PostMapping("/guardarAlumno")
 	public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno nuevoAlumno, BindingResult resultado ) {
-		ModelAndView modelView = new ModelAndView("listaDeAlumnos");		
+		ModelAndView modelView = new ModelAndView("listaDeAlumnos");
+		modelView.addObject("listadoCarreras",carreraService.mostrarCarreras());
+
 			try {
 				if(resultado.hasErrors()) {
 					System.out.println("SE CAPTO UN ERROR DE VALIDACION");
