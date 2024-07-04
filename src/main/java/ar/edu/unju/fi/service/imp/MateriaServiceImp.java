@@ -27,6 +27,7 @@ public class MateriaServiceImp implements MateriaService {
     @Override
     public void guardarMateria(Materia materia) {
         logger.info("Guardando materia: {}", materia.getCodigo());
+        materia.setEstado(true);
         materiaRepository.save(materia);
     }
 

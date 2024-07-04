@@ -32,7 +32,7 @@ public class Materia {
 	private String codigo;
 	
 	@Column(name = "nombre", nullable = false)
-	@Pattern(regexp = "[a-zA-Z ]*", message = "El nombre solo debe contener letras.")
+	@Pattern(regexp = "^[a-zA-Záéíóú ]*$", message = "El nombre solo debe contener letras.")
 	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres.")
 	private String nombre;
 
@@ -41,6 +41,7 @@ public class Materia {
 	private String curso;
 
 	@Column(name = "cantidad_horas", nullable = false)
+	@Size(min = 3, max = 10, message = "El Cantidad de horas debe ser entre 3 y 10 horas.")
 	private String cantidadHoras;
 
 	@Enumerated(EnumType.STRING)

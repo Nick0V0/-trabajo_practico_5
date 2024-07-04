@@ -27,6 +27,7 @@ public class DocenteServiceImp implements DocenteService {
     @Override
     public void guardarDocente(Docente docente) {
         logger.info("Guardando docente: {}", docente.getLegajo());
+        docente.setEstado(true);
         docenteRepository.save(docente);
     }
 

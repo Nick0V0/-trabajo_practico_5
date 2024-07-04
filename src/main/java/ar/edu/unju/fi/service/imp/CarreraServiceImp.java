@@ -26,6 +26,7 @@ public class CarreraServiceImp implements CarreraService{
 		log.info("SERVICE: CarreraServiceImp -> guardarCarrera");
 		log.info("METHOD: guardarCarrera()");
 		log.info("INFO: Guardando Carrera con codigo {}", carrera.getCodigo());
+		carrera.setEstado(true);
 		carreraRepository.save(carrera);
 	}
 
