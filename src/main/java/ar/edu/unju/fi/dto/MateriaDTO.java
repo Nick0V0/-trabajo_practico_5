@@ -2,6 +2,7 @@ package ar.edu.unju.fi.dto;
 
 import org.springframework.stereotype.Component;
 
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Modalidad;
 import jakarta.validation.constraints.Pattern;
@@ -19,6 +20,6 @@ public class MateriaDTO {
 	private String curso;
 	private String cantidadHoras;
 	private Docente docente;
-	private String carrera;
+	private Carrera carrera;
 	private Boolean estado;
 }

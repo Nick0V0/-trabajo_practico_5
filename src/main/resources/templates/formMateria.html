@@ -77,13 +77,13 @@
 			</div>
 
 			<div class="col-sm-6">
-				<label for="carrera" class="form-label">Carrera</label> <input
-					type="text" class="form-control" id="carrera"
-					data-th-field="*{carrera}" required>
-					
-				<p class="form-text text-danger"
-					data-th-if="${#fields.hasErrors('carrera')}"
-					data-th-errors="*{carrera}"></p>
+				<label class="form-label" for="carreraa">Carrera</label> <select
+					class="form-select" id="carrera" data-th-field="*{carrera.codigo}"
+					required>
+					<option value="">Seleccionar Carrera</option>
+					<option data-th-each="l:${listadoCarrera}"
+						data-th-value="${l.codigo}" data-th-text="${l.nombre}"></option>
+				</select>
 			</div>
 
 			<br>

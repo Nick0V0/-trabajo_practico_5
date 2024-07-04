@@ -2,6 +2,7 @@ package ar.edu.unju.fi.model;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +14,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -44,10 +47,12 @@ public class Materia {
 	@Column(name = "modalidad", nullable = false)
 	private Modalidad modalidad;
 
-	@Column(name = "carrera", nullable = false)
-	@Size(min = 3, max = 100, message = "La carrera debe tener entre 3 y 100 caracteres.")
-	private String carrera;
-
+    @Autowired
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "carrera_id")
+    private Carrera carrera; 
+	
+	
 	@Column(name = "estado", nullable = false)
 	private Boolean estado;
 

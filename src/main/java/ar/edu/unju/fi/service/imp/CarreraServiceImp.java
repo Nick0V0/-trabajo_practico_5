@@ -52,16 +52,14 @@ public class CarreraServiceImp implements CarreraService{
 
 	@Override
 	public Carrera buscarCarrera(String codigo) { 
-		// TODO Auto-generated method stub
-		log.info("SERVICE: CarreraServiceImp -> buscarCarrera");
-		log.info("METHOD: buscarCarrera()");
-		log.info("INFO: Buscando carrera con codigo {}", codigo);
 		List<Carrera> todasLasCarreras = carreraRepository.findAll();
 		for (Carrera carreras : todasLasCarreras) {
 			if(carreras.getCodigo().equals(codigo)) {
 				return carreras;
+
 			}
 		}
+
 		return null;
 	}
 

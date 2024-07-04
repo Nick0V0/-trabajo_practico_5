@@ -35,6 +35,7 @@ public class MateriaController {
 		ModelAndView modelView = new ModelAndView("formMateria");
 		modelView.addObject("nuevaMateria", nuevaMateriaDTO);
 		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+		modelView.addObject("listadoCarrera", carreraService.mostrarCarreras());
 		modelView.addObject("flag", false);
 		return modelView;
 	}
@@ -43,13 +44,17 @@ public class MateriaController {
 	public ModelAndView saveMateria(@Valid @ModelAttribute("nuevaMateria") Materia materiaParaGuardar,BindingResult result) {	
 		ModelAndView modelView = new ModelAndView("listaDeMaterias");
 		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+		modelView.addObject("listadoCarrera", carreraService.mostrarCarreras());
 		try {
 			if (result.hasErrors()) {
 				modelView.setViewName("formMateria");
 				modelView.addObject("flag", false);
 			} else {
 				materiaParaGuardar.setDocente(docenteService.buscarDocente(materiaParaGuardar.getDocente().getLegajo()));
+				materiaParaGuardar.setCarrera(carreraService.buscarCarrera(materiaParaGuardar.getCarrera().getCodigo()));
+
 				materiaService.guardarMateria(materiaParaGuardar);	
+
 			}
 		} catch (Exception e) {
 			modelView.addObject("errors", true);
@@ -77,6 +82,7 @@ public class MateriaController {
 		ModelAndView modelView = new ModelAndView("formMateria");
 		modelView.addObject("nuevaMateria", materia);
 		modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+		modelView.addObject("listadoCarrera", carreraService.mostrarCarreras());
 		modelView.addObject("flag", true);
 		return modelView;
 	}
@@ -88,9 +94,11 @@ public class MateriaController {
 			if (result.hasErrors()) {
 				modelView.addObject("nuevaMateria", materiaModificada);
 				modelView.addObject("listadoDocentes", docenteService.mostrarDocentes());
+				modelView.addObject("listadoCarrera", carreraService.mostrarCarreras());
 				modelView.setViewName("formMateria");
 				modelView.addObject("flag", false);
 			} else {
+				materiaModificada.setCarrera(carreraService.buscarCarrera(materiaModificada.getCarrera().getCodigo()));
 				materiaModificada.setDocente(docenteService.buscarDocente(materiaModificada.getDocente().getLegajo()));
 				materiaService.modificarMateria(materiaModificada);
 			}
