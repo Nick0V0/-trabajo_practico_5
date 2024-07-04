@@ -82,10 +82,10 @@ public class CarreraController {
 		ModelAndView modelView = new ModelAndView("listaDeCarreras");
 		try {
 			if (result.hasErrors()) {
-				modelView.addObject("nuevaCarrera", carreraModificada);
-				modelView.addObject("flag", true);
+				modelView.setViewName("formCarrera");
 			} else {
 				carreraService.modificarCarrera(carreraModificada);
+				modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 			}
 		} catch (Exception e) {
 			modelView.addObject("errors", true);
@@ -93,7 +93,6 @@ public class CarreraController {
 			System.out.println(e.getMessage());
 
 		}
-		modelView.addObject("listadoCarreras", carreraService.mostrarCarreras());
 		return modelView;
 	}
 
