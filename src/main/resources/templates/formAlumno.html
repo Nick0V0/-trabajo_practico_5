@@ -18,24 +18,29 @@
 		<form data-th-object="${nuevoAlumno}" data-th-action="${flag}?@{/modificarAlumno}:@{/guardarAlumno}" method="post" class="row">
 			<div >
 				<label for="nombre" class="form-label text-white">Nombre Completo</label> <input type="text" class="form-control" id="nombre" data-th-field="*{nombre}"  >
+				<p class="form-text text-danger" data-th-if="${#fields.hasErrors('nombre')}" data-th-errors="*{nombre}"></p>
 			</div >
 			
 						<div class="col-6">
 				<label for="apellido" class="form-label text-white">Apellido</label> <input type="text" class="form-control col-4"
 					id="apellido" aria-describedby="apellido" data-th-field="*{apellido}" >
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('apellido')}" data-th-errors="*{apellido}"></p>
 			</div>
 						<div class="col-6">
 				<label for="email" class="form-label text-white">Email
 					</label> <input type="email" class="form-control"
 					id="email" aria-describedby="email" data-th-field="*{email}" >
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"></p>
 			</div>
 						<div class="col-6">
 				<label for="telefono" class="form-label text-white">Telefono</label> <input type="number" class="form-control col-4"
 					id="telefono" aria-describedby="telefono" data-th-field="*{telefono}" >
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('telefono')}" data-th-errors="*{telefono}"></p>
 			</div>
 						<div class="col-6">
 				<label for="fec_nac" class="form-label text-white">Fecha de nacimiento </label> <input type="date" class="form-control col-4"
 					id="fec_nac" aria-describedby="fec_nac" data-th-field="*{fec_nac}" >
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('fec_nac')}" data-th-errors="*{fec_nac}"></p>
 			</div>
 						<div class="col-6">
 				<label for="domicilio" class="form-label text-white">Domicilio</label> <input type="text" class="form-control col-4"
@@ -44,10 +49,12 @@
 			<div class="col-6">
 				<label for="dni" class="form-label text-white">DNI</label> <input type="number" class="form-control"
 					id="dni" aria-describedby="dni" data-th-field="*{dni}" required>
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('dni')}" data-th-errors="*{dni}"></p>
 			</div>
 						<div class="col-6">
 				<label for="lu" class="form-label ">Libreta Universitaria</label> <input type="number" class="form-control"
 					id="lu" aria-describedby="lu" data-th-field="*{lu}" data-th-readonly=${flag} required>
+					<p class="form-text text-danger" data-th-if="${#fields.hasErrors('lu')}" data-th-errors="*{lu}"></p>
 			</div>
 			
 			<div class="col-6">

@@ -27,6 +27,6 @@ public class Carrera {
 	@Id
 	private String codigo;
 	private String nombre;
-	private int cantidadAños;
+	private int cantidadAnios;
 	private boolean estado;
 }
