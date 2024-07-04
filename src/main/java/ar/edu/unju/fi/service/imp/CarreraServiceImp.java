@@ -55,6 +55,8 @@ public class CarreraServiceImp implements CarreraService{
 		List<Carrera> todasLasCarreras = carreraRepository.findAll();
 		for (Carrera carreras : todasLasCarreras) {
 			if(carreras.getCodigo().equals(codigo)) {
+				log.info("METHOD: buscando Carrera()");
+				log.info("Carrera", carreras.getCodigo(),carreras.getNombre());
 				return carreras;
 
 			}
