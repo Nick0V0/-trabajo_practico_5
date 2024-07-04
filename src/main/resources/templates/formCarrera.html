@@ -35,16 +35,25 @@
 						<div class="form-outline mb-4">
 	                        <input type="text" id="cod" class="form-control" data-th-field="*{codigo}" data-th-readonly="${flag}">
 	                        <label class="form-label" for="cod">Codigo</label>
+	                        <p class="form-text text-danger"
+							data-th-if="${#fields.hasErrors('codigo')}"
+							data-th-errors="*{codigo}"></p>
 	                      </div>
 	                      
 	                     <div class="form-outline mb-4">
 	                        <input type="text" id="nombre" class="form-control" data-th-field="*{nombre}"  />
 	                        <label class="form-label" for="nombre">Nombre de la Carrera</label>
+	                        <p class="form-text text-danger"
+							data-th-if="${#fields.hasErrors('nombre')}"
+							data-th-errors="*{nombre}"></p>
 	                     </div>
 	
 	                     <div class="form-outline mb-4">
 	                        <input type="number" id="cantidad" class="form-control" data-th-field="*{cantidadAnios}"/>
 	                        <label class="form-label" for="cantidad">Cantidad de Años</label>
+	                        <p class="form-text text-danger"
+								data-th-if="${#fields.hasErrors('cantidadAnios')}"
+								data-th-errors="*{cantidadAnios}"></p>
 	                     </div>
 	                     <div class="col-sm-6">
 							<label for="estadoCarrera" class="form-label mt-1">Estado</label><br>
@@ -62,7 +71,9 @@
 	                      <a class="link link-light float-end" href="/listadoCarreras">Ver listado de carreras</a>
 	                     
 						</form>
-	
+							<div class="alert alert-danger" role="alert" data-th-if="${errors}">
+		<p data-th-text="${cargaCarreraErrorMessage}"></p>
+	</div>
 	                  </div>
 	                </div>
 	              </div>
