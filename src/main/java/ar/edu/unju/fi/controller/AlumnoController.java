@@ -2,6 +2,7 @@ package ar.edu.unju.fi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,23 +10,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.service.AlumnoService;
+import ar.edu.unju.fi.service.MateriaService;
+import jakarta.validation.Valid;
 
 @Controller
 public class AlumnoController {
-
-
 	@Autowired
-	Alumno alumno;
+	Alumno nuevoAlumno;
 	
 	@Autowired
 	AlumnoService alumnoService;
+	@Autowired
+	Materia nuevaMateria;
+	@Autowired
+	MateriaService materiaService;
 
 	@GetMapping("/formularioAlumno")
 	public ModelAndView getFormAlumno() {
 		
 		ModelAndView modelView = new ModelAndView("formAlumno");
-		modelView.addObject("nuevoAlumno", alumno);	
+		modelView.addObject("nuevoAlumno", nuevoAlumno);	
 		modelView.addObject("flag", false);
 	
 		return modelView;
@@ -41,12 +47,28 @@ public class AlumnoController {
 	}
 	
 	@PostMapping("/guardarAlumno")
-	public ModelAndView saveAlumno( @ModelAttribute("nuevoAlumno") Alumno alumnoParaGuardar) {
-		ModelAndView modelView = new ModelAndView("listaDeAlumnos");
-		alumnoService.guardarAlumno(alumnoParaGuardar);
-		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
-		
-		return modelView;	
+	public ModelAndView saveAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno nuevoAlumno, BindingResult resultado ) {
+		ModelAndView modelView = new ModelAndView("listaDeAlumnos");		
+			try {
+				if(resultado.hasErrors()) {
+					modelView.setViewName("formAlumno");
+					;
+				}
+				else {
+					alumnoService.guardarAlumno(nuevoAlumno);
+					modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+					
+					
+				}
+			}
+			catch( Exception e){
+				boolean errors = true;
+				modelView.addObject("errors", errors);
+				modelView.addObject("cargaAlumnoErrorMessage", " Error al cargar en la BD " + e.getMessage());
+				System.out.println(e.getMessage());
+			}
+
+		return modelView;
 	}
 	
 	@GetMapping("/modificarAlumno/{lu}")
@@ -60,16 +82,30 @@ public class AlumnoController {
 		return modelView;
 	}
  
-	@PostMapping("/modificarAlumno")	
-	public ModelAndView updateAlumnoByName(@ModelAttribute("nuevoAlumno") Alumno alumnoModificado) {
-
-		// guardar
-		alumnoService.modificarAlumno(alumnoModificado);
-		// mostrar el listado
-		ModelAndView modelView = new ModelAndView("listaDeAlumnos");
-		modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
-
+	@PostMapping("/modificarAlumno")
+	public ModelAndView modificarAlumno(@Valid @ModelAttribute("nuevoAlumno") Alumno alumnoModificado, BindingResult resultado) {
+		
+			ModelAndView modelView = new ModelAndView("listaDeAlumnos");
+			
+			try {
+				if(resultado.hasErrors()) {
+					modelView.setViewName("formAlumno");
+				}
+				else {
+					//System.out.println("Alumno modificado correctamente  "+nuevoAlumno.getNombre());
+					alumnoService.modificarAlumno(alumnoModificado);
+					modelView.addObject("listadoAlumnos", alumnoService.mostrarAlumnos());
+				}
+			}
+			catch( Exception e){
+				boolean errors = true;
+				modelView.addObject("errors", errors);
+				modelView.addObject("cargaAlumnoErrorMessage", " Error al cargar en la BD " + e.getMessage());
+				System.out.println(e.getMessage());
+			}
+			
 		return modelView;
+			
 	} 
 	
 	@GetMapping("/borrarAlumno/{lu}")

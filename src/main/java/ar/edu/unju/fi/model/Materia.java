@@ -56,6 +56,6 @@ public class Materia {
 	private Docente docente;
 		
 	
-	@ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany (fetch = FetchType.EAGER)
 	private List<Alumno> alumnos;
 }
