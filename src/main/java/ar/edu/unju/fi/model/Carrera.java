@@ -32,7 +32,7 @@ public class Carrera {
 	@Size(min=1, max=10,message="longitud de código no valida")
 	private String codigo;
 	@NotBlank(message="Ingresar Nombre de la Carrera")
-	@Size(min=3, max=20,message="El nombre debe contener minimo 3 Caracteres y 20 como maximo")
+	@Size(min=3, max=40,message="El nombre debe contener minimo 3 Caracteres y 20 como maximo")
 	@Pattern(regexp = "^[a-zA-Záéíóú ]*$", message = "Solo se permiten letras y espacios")
 	private String nombre;
 	@NotNull

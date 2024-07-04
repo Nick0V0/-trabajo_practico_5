@@ -26,10 +26,10 @@ import lombok.Data;
 public class Alumno {
 	@Id
 	@NotBlank(message="Debe ingresar Libreta Universitaria del Alumno")
-	@Size(min=4, max=10,message="longitud de LU no valida")
+	@Size(min=1, max=10,message="longitud de LU no valida, Ingresa de 1-10 digitos")
 	private String lu;
 	@NotBlank(message="Debe ingresar DNI del Alumno")
-	@Size(min=8, max=10,message="longitud del DNI no valida")
+	@Size(min=7, max=9,message="longitud del DNI no valida, de 7-9 digitos")
 	@Pattern(regexp="[0-9]*",message="Solo se debe ingresar Numeros")
 	private String dni;
 	@NotBlank(message="Debe ingresar Nombre del Alumno")
@@ -42,10 +42,11 @@ public class Alumno {
 	private String apellido;
 	@Email
 	@NotBlank(message="Debe ingresar el Correo del Alumno")
-	@Size(min=8, max=60,message="E-mail no valido")
+	@Size(min=8, max=60,message="E-mail no valido,de 8-60 digitos")
 	private String email;
 	@Size(min=9, max=10,message="longitud no valida")
 	@Pattern(regexp="[0-9]*",message="Solo se debe ingresar Numeros")
+	@Size(min=10, max=10,message="Ingrese un telefono valido (10 caracteres)")
 	private String telefono;
 	@Past
 	@NotNull	
